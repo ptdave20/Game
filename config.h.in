@@ -1,0 +1,11 @@
+#ifndef CONFIG
+#define CONFIG
+
+#define game_VERSION_MAJOR @game_VERSION_MAJOR@
+#define game_VERSION_MINOR @game_VERSION_MINOR@
+#define game_DEFAULT_WIDTH @game_DEFAULT_WIDTH@
+#define game_DEFAULT_HEIGHT @game_DEFAULT_HEIGHT@
+#define game_DEFAULT_BPP @game_DEFAULT_BPP@
+#define game_DEFAULT_FRAMELIMIT @game_DEFAULT_FRAMELIMIT@
+#endif // CONFIG
+

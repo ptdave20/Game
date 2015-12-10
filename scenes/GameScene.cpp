@@ -14,8 +14,10 @@ void GameScene::init(const sf::Vector2u &windowSize) {
             p.setTexture(particle);
             p.setPosition(rand()%window.x, rand()%window.y);
             auto c = sf::Color::White;
-            c.a = (190) * rand()/2.0+1.0;
+
+            c.a = (rand()%150)+25;
             p.setColor(c);
+
         }
     }
 
@@ -44,8 +46,9 @@ void GameScene::handleEvent(const sf::Event &event) {
 
         auto xMult = (float)window.x / (float)event.size.width;
         auto yMult = (float)window.y / (float)event.size.height;
+        auto xDiff = event.size.width - window.x;
+        auto yDiff = event.size.height - window.y;
 
-        cout << xMult << "*"<<yMult << endl;
         window.x = event.size.width;
         window.y = event.size.height;
 
@@ -53,15 +56,23 @@ void GameScene::handleEvent(const sf::Event &event) {
             auto pos = p.getPosition();
             pos.x *= xMult;
             pos.y *= yMult;
+            p.setPosition(pos);
         }
 
-        player.setPosition(player.getPosition().x * xMult, player.getPosition().y * yMult);
+        auto pPos = player.getPosition();
+        pPos.x*=xMult;
+        pPos.y*=yMult;
+
+        cout << "playerPos = " << pPos.x <<"x"<<pPos.y << endl;
+
+        player.setPosition(pPos);
     }
 }
 
 void GameScene::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+
     for(sf::Sprite p : particleBG) {
-        target.draw(p);
+        target.draw(p,sf::BlendMode::BlendAlpha);
     }
     target.draw(player);
 }

@@ -22,7 +22,7 @@ configure_file(
 include_directories("${PROJECT_BINARY_DIR}")
 aux_source_directory(. SRC_LIST)
 aux_source_directory(./scenes SRC_LIST)
-add_executable(${PROJECT_NAME} ${SRC_LIST} MainEngine.cpp MainEngine.h scenes/ptDaveScene.cpp scenes/ptDaveScene.h scenes/MainMenu.cpp scenes/MainMenu.h scenes/GameScene.cpp scenes/GameScene.h Objects/Character.cpp Objects/Character.h)
+add_executable(${PROJECT_NAME} ${SRC_LIST} MainEngine.cpp MainEngine.h scenes/ptDaveScene.cpp scenes/ptDaveScene.h scenes/MainMenu.cpp scenes/MainMenu.h scenes/GameScene.cpp scenes/GameScene.h)
 
 set(Assets
 	${PROJECT_SOURCE_DIR}/assets/arial.ttf

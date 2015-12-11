@@ -19,9 +19,10 @@ public:
 private:
     sf::Texture particle;
     sf::Texture spaceship;
-    sf::Sprite particleBG[15];
+    sf::Sprite particleBG[25];
     sf::Sprite player;
     sf::Vector2u window;
+    sf::Vector2u moveTo;
 
     int shipRateOfFire,shipDamage;
     int shipShields,shipArmor;

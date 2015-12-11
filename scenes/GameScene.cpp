@@ -25,7 +25,8 @@ void GameScene::init(const sf::Vector2u &windowSize) {
         cout << "Unable to load spaceship" << endl;
     } else {
         player.setTexture(spaceship);
-        player.setPosition(window.x/2 - spaceship.getSize().x / 2, window.y - spaceship.getSize().y);
+        player.setOrigin(spaceship.getSize().x / 2, spaceship.getSize().y / 2);
+        player.setPosition(window.x/2, window.y - spaceship.getSize().y / 2);
     }
 }
 
@@ -39,13 +40,18 @@ void GameScene::update(const sf::Time &time1) {
         }
         p.setPosition(pos);
     }
+
+    // Move player to mouse position
+    auto xDelta = (moveTo.x - player.getPosition().x) * time1.asSeconds();
+    auto yDelta = (moveTo.y - player.getPosition().y) * time1.asSeconds();
+    player.move(xDelta,yDelta);
 }
 
 void GameScene::handleEvent(const sf::Event &event) {
     if(event.type == sf::Event::Resized) {
 
-        auto xMult = (float)window.x / (float)event.size.width;
-        auto yMult = (float)window.y / (float)event.size.height;
+        auto xMult = (float)event.size.width/(float)window.x;
+        auto yMult = (float)event.size.height/(float)window.y;
         auto xDiff = event.size.width - window.x;
         auto yDiff = event.size.height - window.y;
 
@@ -63,9 +69,12 @@ void GameScene::handleEvent(const sf::Event &event) {
         pPos.x*=xMult;
         pPos.y*=yMult;
 
-        cout << "playerPos = " << pPos.x <<"x"<<pPos.y << endl;
-
         player.setPosition(pPos);
+    }
+
+    if(event.type == sf::Event::MouseMoved) {
+        moveTo.x = event.mouseMove.x;
+        moveTo.y = event.mouseMove.y;
     }
 }
 
